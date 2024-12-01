@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../Styles/AddJob.module.css";
 import { useNavigate } from "react-router-dom";
@@ -8,35 +8,45 @@ const AddJob = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const redirect = useNavigate();
 
+  const [inp, setinp] = useState('');
+  const [skills, setskills] = useState([]);
+  console.log(skills);
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter" && inp.trim() !== "") {
+      setskills((prevSkills) => [...prevSkills, inp.trim()]);
+      setinp(''); // Clear input field after adding the skill
+    }
+  };
+
   const onSubmit = async (data) => {
-     try {
-      const response = await fetch('https://job-listnig.onrender.com/api/v1/jobs/addjob',{
-        method : 'POST',
+    try {
+      const jobData = { ...data, skills }; // Add skills array to form data
+      const response = await fetch('https://job-listnig.onrender.com/api/v1/jobs/addjob', {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
-       })
-       if (response.ok) {
+        body: JSON.stringify(jobData),
+      });
+
+      if (response.ok) {
         const result = await response.json();
-        toast.success('job added successful!');
-        redirect('/')
+        toast.success('Job added successfully!');
+        redirect('/');
         console.log(result);
       } else {
         const error = await response.json();
         toast.error(error.message || 'Something went wrong.');
       }
-     } catch (error) {
-      toast.error('An error occurred while Adding job.');
-        console.log("job data is not send",error.message)
-     }
-   
-    
+    } catch (error) {
+      toast.error('An error occurred while adding the job.');
+      console.log("Job data is not sent", error.message);
+    }
   };
 
   return (
@@ -55,7 +65,7 @@ const AddJob = () => {
           </div>
 
           <div className={styles.jobinput}>
-            <label htmlFor="addLogoURL">Logo URL</label>
+            <label htmlFor="logoUrl">Logo URL</label>
             <input
               type="text"
               placeholder="Enter the link"
@@ -75,9 +85,9 @@ const AddJob = () => {
           </div>
 
           <div className={styles.jobinput}>
-            <label htmlFor="monthlySalary">Monthly Salary</label>
+            <label htmlFor="salary">Monthly Salary</label>
             <input
-              type="number"
+              type="text"
               placeholder="Enter Amount in rupees"
               {...register("salary", { required: "This field is required" })}
             />
@@ -95,7 +105,7 @@ const AddJob = () => {
           </div>
 
           <div className={styles.jobinput}>
-            <label htmlFor="remoteOffice">Remote/Office</label>
+            <label htmlFor="mode">Remote/Office</label>
             <select {...register("mode", { required: "This field is required" })}>
               <option value="">Select</option>
               <option value="Remote">Remote</option>
@@ -105,7 +115,7 @@ const AddJob = () => {
           </div>
 
           <div className={styles.jobinput}>
-            <label htmlFor="jobLocation">Job Location</label>
+            <label htmlFor="location">Job Location</label>
             <input
               type="text"
               placeholder="Enter Location"
@@ -133,23 +143,46 @@ const AddJob = () => {
           </div>
 
           <div className={styles.jobinput}>
-            <label htmlFor="skillsRequired">Skills Required</label>
+            <label htmlFor="skills">Skills Required</label>
             <input
               type="text"
-              placeholder="Enter the must-have skills"
-              {...register("skills", { required: "This field is required" })}
+              value={inp}
+              onChange={(e) => setinp(e.target.value)}
+              onKeyDown={handleKeyPress}
+              placeholder="Enter the must-have skills and press Enter"
             />
             {errors.skills && <span>{errors.skills.message}</span>}
           </div>
 
+          {/* Skills List Section */}
+          <div className={styles.skillsContainer}>
+            {skills.map((skill, idx) => (
+              <div key={idx} className={styles.skillItem}>
+                <div className={styles.skill}>
+                  <span>{skill}</span>
+                </div>
+                <div className={styles.remove_skill}>
+                  <button
+                    type="button"
+                    className={styles.removeSkillButton}
+                    onClick={() => {
+                      setskills((prevSkills) => prevSkills.filter((_, index) => index !== idx));
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className={styles.jobinput}>
-            <label htmlFor="information">Information</label>
+            <label htmlFor="additionalInformation">Information</label>
             <input
               type="text"
               placeholder="Enter the additional information"
-              {...register("additionalInformation", { required: "This field is required" })}
+              {...register("additionalInformation")}
             />
-            {errors.additionalInformation && <span>{errors.additionalInformation.message}</span>}
           </div>
 
           <div className={styles.jobbuttons}>
@@ -178,9 +211,8 @@ const AddJob = () => {
         </div>
       </div>
       <div className={styles.img_heading}>
-          <p>Your Personal Job Finder</p>
-        </div>
-
+        <p>Your Personal Job Finder</p>
+      </div>
     </div>
   );
 };
