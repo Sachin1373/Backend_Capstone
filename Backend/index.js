@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import error from "./src/middlewares/error.js"
 import auth from "./src/routes/Auth.js"
+import job from "./src/routes/Job.js"
 import dbconnect from "./src/config/dbconnection.js";
 import cors from "cors";
 
@@ -30,6 +31,7 @@ app.get('/api/v1', (req, res) => {
     res.send("Welcome to the backend");
 });
 app.use('/api/v1/auth',auth)
+app.use('/api/v1/job',job)
 
 
 dbconnect();
