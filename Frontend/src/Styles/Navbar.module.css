@@ -1,0 +1,93 @@
+.nav {
+    position: relative;
+    background-color: #ED5353;
+    border-radius: 0 0 50px 50px;
+    padding: 10px 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    font-family: DM Sans;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 0;
+  }
+  
+  .loginView,
+  .logoutView {
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    gap: 15px;
+  }
+  
+  .loginView span {
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+  }
+  
+  .recruiterLogo {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    color: rgba(255, 107, 107, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border-radius: 50%;
+  }
+  
+  .logoutView button {
+    background-color: white;
+    color: rgba(255, 107, 107, 1);
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logoutView button:hover {
+    background-color: rgba(255, 107, 107, 0.8);
+    color: white;
+  }
+  
+  /* Rectangles Styling */
+  .rectangle1 {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 280px;
+    height: 50px;
+    z-index: 0;
+  }
+  
+  .rectangle2 {
+    position: absolute;
+    top: 0;
+    left: 38%;
+    width: 400px;
+    height: 80px;
+    z-index: 0;
+  }
+  
+  .rectangle3 {
+    position: absolute;
+    left: 84%;
+    transform: translateX(-50%);
+    width: 330px;
+    height: 117px;
+    z-index: 0;
+    
+  }
+  
