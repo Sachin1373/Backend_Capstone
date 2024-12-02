@@ -5,46 +5,56 @@ import { useNavigate } from "react-router-dom";
 import img from "../assets/addjobimg.png";
 
 const AddJob = () => {
+  const userdetails = JSON.parse(localStorage.getItem("UserDetails"))
+  const token = userdetails?.token; 
+
+  
+  
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const redirect = useNavigate();
 
   const [inp, setinp] = useState('');
   const [skills, setskills] = useState([]);
-  console.log(skills);
+
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter" && inp.trim() !== "") {
+      e.preventDefault();
       setskills((prevSkills) => [...prevSkills, inp.trim()]);
-      setinp(''); // Clear input field after adding the skill
+      setinp(''); 
     }
   };
 
   const onSubmit = async (data) => {
     try {
-      const jobData = { ...data, skills }; // Add skills array to form data
-      const response = await fetch('https://job-listnig.onrender.com/api/v1/jobs/addjob', {
+      const jobData = { ...data, skills }; 
+      const response = await fetch('http://localhost:8000/api/v1/job/addjob', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization : `Bearer ${token}`
         },
+        
         body: JSON.stringify(jobData),
       });
 
       if (response.ok) {
         const result = await response.json();
-        toast.success('Job added successfully!');
-        redirect('/');
-        console.log(result);
+        reset()
+        setskills([])
+        // redirect('/');
+        
       } else {
         const error = await response.json();
-        toast.error(error.message || 'Something went wrong.');
+        console.log(error)
+       
       }
     } catch (error) {
-      toast.error('An error occurred while adding the job.');
       console.log("Job data is not sent", error.message);
     }
   };
@@ -211,7 +221,7 @@ const AddJob = () => {
         </div>
       </div>
       <div className={styles.img_heading}>
-        <p>Your Personal Job Finder</p>
+        <p>Recruiter add job details here</p>
       </div>
     </div>
   );

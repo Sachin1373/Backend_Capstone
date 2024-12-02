@@ -11,7 +11,7 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch("https://job-listnig.onrender.com/api/v1/auth/login", {
+      const response = await fetch("http://localhost:8000/api/v1/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,23 +21,23 @@ function Login() {
 
       if (response.ok) {
         const result = await response.json();
-        toast.success("Login successful!");
+        console.log(result)
         localStorage.setItem(
-          "recuirterDetail",
+          "UserDetails",
           JSON.stringify({
-            token: result.jwtToken,
-            recuirterName: result.recuirterName,
+            token: result.token,
+            Username: result.username,
             expiry: new Date().getTime() + 60 * 60 * 1000,
           }))
-          setTimeout(()=>{
-            redirect('/')
-          },2000)
+          // setTimeout(()=>{
+          //   redirect('/')
+          // },2000)
       } else {
         const error = await response.json();
-        toast.error(error.message || "Invalid credentials.");
+        // toast.error(error.message || "Invalid credentials.");
       }
     } catch (error) {
-      toast.error("An error occurred while logging in.");
+      // toast.error("An error occurred while logging in.");
       console.error("Login error:", error.message);
     }
   };

@@ -18,7 +18,7 @@ function Register() {
 
    const PostRegisterData = async(data) =>{
       try {
-        const response = await fetch('https://job-listnig.onrender.com/api/v1/auth/signup',{
+        const response = await fetch('http://localhost:8000/api/v1/auth/signup',{
           method : 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -28,14 +28,11 @@ function Register() {
        
         if (response.ok) {
           const result = await response.json();
-          toast.success('Registration successful!');
           console.log(result);
         } else {
           const error = await response.json();
-          toast.error(error.message || 'Something went wrong.');
         }
       } catch (error) {
-        toast.error('An error occurred while registering.');
         console.log("Registeres data is not send",error.message)
       }
    }

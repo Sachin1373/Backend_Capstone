@@ -15,6 +15,8 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 
+dbconnect();
+
 app.use(cors());
 app.use(compression());
 app.use(
@@ -27,19 +29,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/api/v1', (req, res) => {
-    console.log("Welcome to the backend");
+
     res.send("Welcome to the backend");
 });
 app.use('/api/v1/auth',auth)
 app.use('/api/v1/job',job)
-
-
-dbconnect();
-
-
 app.use(error);
 
 
 app.listen(port, () => {
-    console.log(`Server started at port: ${port}`);
+    console.log(`Server started at the port: ${port}`);
 });

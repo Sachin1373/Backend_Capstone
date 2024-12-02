@@ -26,7 +26,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     minlength : 5,
-    maxlength : 50,
     required: true,
   },
 },{ timestamps: true });

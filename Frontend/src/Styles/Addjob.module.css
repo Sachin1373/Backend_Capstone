@@ -97,12 +97,6 @@
     border-radius: 4px;
   }
 
-  .img_heading{
-    position: absolute;
-    top: 20px;
-    right: 120px;
-}
-
 
 .skillsContainer {
     display: flex;
@@ -171,6 +165,11 @@
     padding-right: 5px;
   }
   
+.img_heading{
+    position: absolute;
+    top: 20px;
+    right: 90px;
+}
 
 
 .img_heading p{
