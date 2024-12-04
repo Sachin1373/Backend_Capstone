@@ -29,9 +29,9 @@ function Login() {
             Username: result.username,
             expiry: new Date().getTime() + 60 * 60 * 1000,
           }))
-          // setTimeout(()=>{
-          //   redirect('/')
-          // },2000)
+          setTimeout(()=>{
+            redirect('/')
+          },2000)
       } else {
         const error = await response.json();
         // toast.error(error.message || "Invalid credentials.");

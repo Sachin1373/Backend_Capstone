@@ -7,7 +7,7 @@ const JobList = ({ Search }) => {
 
   const userdetails = JSON.parse(localStorage.getItem('UserDetails'));
   const token = userdetails?.token;
-  console.log(token);
+  
 
   useEffect(() => {
     if (Search) {
@@ -21,7 +21,7 @@ const JobList = ({ Search }) => {
   }, [Search, jobs]);
 
   useEffect(() => {
-    console.log('Fetching jobs...');
+    
     fetch('http://localhost:8000/api/v1/job/getalljobs', {
       method: 'GET',
       headers: {
@@ -37,7 +37,6 @@ const JobList = ({ Search }) => {
         return response.json();
       })
       .then((data) => {
-        console.log('Data fetched:', data);
         setJobs(data.jobs || []);
         setFilteredJobs(data.jobs || []);
       })

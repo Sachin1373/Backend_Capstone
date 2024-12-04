@@ -1,12 +1,12 @@
 import styles from "../Styles/Navbar.module.css";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import rec1 from "../assets/Rectangle1.png";
 import rec2 from "../assets/Rectangle2.png";
 import rec3 from "../assets/Rectangle3.png";
 import { useState, useEffect } from "react";
 
 const Navbar = ({ onLogut }) => {
-  //   const redirect = useNavigate();
+  const redirect = useNavigate();
   const [loggedin, setloggedin] = useState(false);
 
   //   const tokenTime = JSON.parse(localStorage.getItem("recuirterDetail"));
@@ -33,7 +33,7 @@ const Navbar = ({ onLogut }) => {
         <div className={styles.loginView}>
           <span
             onClick={() => {
-              toast.success("Logout successful");
+              
               setloggedin(false);
               onLogut();
               localStorage.removeItem("recuirterDetail");
@@ -46,8 +46,8 @@ const Navbar = ({ onLogut }) => {
         </div>
       ) : (
         <div className={styles.logoutView}>
-          <button onClick={() => redirect("/Login")}>Login</button>
-          <button onClick={() => redirect("/Register")}>Register</button>
+          <button onClick={() => redirect("/login")}>Login</button>
+          <button onClick={() => redirect("/register")}>Register</button>
         </div>
       )}
     </div>
