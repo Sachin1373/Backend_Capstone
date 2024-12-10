@@ -1,25 +1,14 @@
 import styles from "../Styles/Navbar.module.css";
 import { useNavigate } from "react-router-dom";
-import rec1 from "../assets/Rectangle1.png";
-import rec2 from "../assets/Rectangle2.png";
-import rec3 from "../assets/Rectangle3.png";
-import { useState, useEffect } from "react";
+import rec1 from "/public/Rectangle1.png";
+import rec2 from "/public/Rectangle2.png";
+import { AuthContext } from "../Context/AuthContext";
+import rec3 from "/public/Rectangle3.png";
+import { useContext } from "react";
 
 const Navbar = ({ onLogut }) => {
   const redirect = useNavigate();
-  const [loggedin, setloggedin] = useState(false);
-
-  //   const tokenTime = JSON.parse(localStorage.getItem("recuirterDetail"));
-  //   useEffect(() => {
-  //     const currentTime = new Date().getTime();
-  //     const logg =
-  //       tokenTime !== null
-  //         ? tokenTime.expiry > currentTime
-  //           ? true
-  //           : false
-  //         : false;
-  //     setloggedin(logg);
-  //   }, [tokenTime]);
+  const { isLoggedIn, logout } = useContext(AuthContext);
 
   return (
     <div className={styles.nav}>
@@ -29,16 +18,9 @@ const Navbar = ({ onLogut }) => {
       <img src={rec3} alt="Rectangle 3" className={styles.rectangle3} />
 
       <h3 className={styles.title}>Jobfinder</h3>
-      {loggedin ? (
+      {isLoggedIn ? (
         <div className={styles.loginView}>
-          <span
-            onClick={() => {
-              
-              setloggedin(false);
-              onLogut();
-              localStorage.removeItem("recuirterDetail");
-            }}
-          >
+          <span onClick={logout}>
             Logout
           </span>
           <span>Hello! Recruiter</span>

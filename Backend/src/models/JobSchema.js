@@ -21,6 +21,14 @@ const jobSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  totalsize:{
+    type : Number,
+    require : true,
+  },
+  currentsize : {
+    type : Number,
+    require : true,
+  },
   location: {
     type: String,
     required: true,

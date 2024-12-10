@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../Styles/AddJob.module.css";
 import { useNavigate } from "react-router-dom";
-import img from "../assets/addjobimg.png";
+import img from "/public/addjobimg.png";
 
 const AddJob = () => {
   const userdetails = JSON.parse(localStorage.getItem("UserDetails"))
   const token = userdetails?.token; 
 
-  
-  
   const {
     register,
     handleSubmit,
@@ -113,6 +111,26 @@ const AddJob = () => {
             </select>
             {errors.jobType && <span>{errors.jobType.message}</span>}
           </div>
+           
+          <div className={styles.jobinput}>
+            <label htmlFor="totalsize">Total Size</label>
+            <input
+              type="number"
+              placeholder="Enter the total team size"
+              {...register("totalsize", { required: "This field is required" })}
+            />
+            {errors.totalsize && <span>{errors.totalsize.message}</span>}
+          </div>
+
+          <div className={styles.jobinput}>
+            <label htmlFor="currentsize">Current Size</label>
+            <input
+              type="number"
+              placeholder="Enter the current team size"
+              {...register("currentsize", { required: "This field is required" })}
+            />
+            {errors.currentsize && <span>{errors.currentsize.message}</span>}
+          </div>
 
           <div className={styles.jobinput}>
             <label htmlFor="mode">Remote/Office</label>
@@ -200,15 +218,12 @@ const AddJob = () => {
               className={styles.canceladdJob}
               type="button"
               onClick={() => {
-                toast.error("Job add cancelled!");
-                setTimeout(() => {
-                  redirect("/");
-                }, 2000);
+                redirect('/')
               }}
             >
               Cancel
             </button>
-            <button type="submit" className={styles.addjobbutton}>
+            <button type="submit" className={styles.addjobbutton} onClick={()=>redirect('/')}>
               + Add Job
             </button>
           </div>

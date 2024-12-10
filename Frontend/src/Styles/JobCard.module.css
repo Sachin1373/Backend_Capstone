@@ -1,87 +1,152 @@
-.jobCard {
-    position: relative;
-    border: 1px solid #f5f5f5;
-    border-radius: 8px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-    height: auto;
-    width: 1200px;
-    margin: 20px auto;
+
+.job_list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.jobCard{
     display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-content: space-around;
-    flex-direction: row;
+    width: 80vw;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 22px 2px #FF202040;
+  
+}
+
+.left_card{
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+    gap: 20px;
+    
+}
+
+.log_details{
+    display: flex;
     gap: 20px;
 }
 
-.jobTitle{
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 25%;
+    
+}
+
+.jobPosition{
     font-family: Roboto;
-    font-size: 20px;
-    font-weight: 700;
+    font-size: 19.49px;
+    font-weight: 500;
     line-height: 17.39px;
     text-align: left;
-       
 }
 
 .companyLogo{
-    height: 70px;
-    width: 70px;
-    /* margin-top: 40px; */
-    border: 2px solid black;
+    height: 60px;
+    width: 60px;
 }
 
-.location{
-    margin-top: 40px;
-}
-
-.details{
+.salry_team{
     display: flex;
-    gap: 10px;
-    flex-direction: column;
+    gap: 20px;
+    
 }
 
 .mode{
     display: flex;
-    gap: 5px;
+    gap: 20px;
+    font-family: Roboto;
+    font-size: 15.1px;
+    font-weight: 500;
+    line-height: 13.47px;
+    text-align: left;
+    color:#ED5353;
 }
-.skills{
+
+.salry_team p{
     display: flex;
+    gap: 5px;
     align-items: center;
-    width: 250px;
-    height: auto;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-content: flex-end;
+    justify-content: center;
+    font-family: Roboto;
+    font-size: 18.38px;
+    font-weight: 500;
+    line-height: 16.39px;
+    text-align: left;
+    color:#9C9C9C;
     
 }
+
+.location{
+    display: flex;
+    align-items: center;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.right_card{
+    width: 50%;
+    display: flex;
+    gap: 10px;
+    padding: 0 20px;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+
+.viewDetailsBtn{
+    width: 154px;
+    height: 36.5px;
+    color: white;
+    gap: 0px;
+    border: none;
+    background-color: #ED5353;
+    cursor: pointer;
+    border-radius: 3.92px;
+    font-family: DM Sans;
+    font-size: 19.61px;
+    font-weight: 500;
+    line-height: 28.25px;
+    text-align: center;
+
+}
+
+.location{
+    font-family: Roboto;
+    font-size: 18.38px;
+    font-weight: 500;
+    line-height: 16.39px;
+    text-align: left;
+    color:#9C9C9C;
+}
+
 .skill{
     display: flex;
-    gap: 5px;
-    height: auto;
-    flex-wrap: wrap;
+    gap: 10px;
 }
+
+
 .skillTag{
-    height: auto;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
     width: auto;
-    padding: 5px;
-    border-radius: 3px;
-    font-weight: 900;
+    height: 30px;
+    border-radius: 1.43px;
     background-color: #FFEEEE;
+    font-family: DM Sans;
+    font-size: 15.94px;
+    font-weight: 500;
+    line-height: 22.96px;
+    text-align: center;
 }
+
 .btn{
-    position: absolute;
-    bottom: 15px;
-    right: 25px;  
-}
-.viewDetailsBtn{
-    background-color: #ed5353;
-    height: 35px;
-    width: 150px;
-    font-size: large;
-    font-weight:500;
-    border-radius: 5px;
-    cursor: pointer;
+    display: flex;
+    gap: 10px;
 }

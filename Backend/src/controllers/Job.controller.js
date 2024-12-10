@@ -8,6 +8,8 @@ export const addjob = async (req, res) => {
     jobPosition,
     jobType,
     mode,
+    totalsize,
+    currentsize,
     location,
     jobDescription,
     aboutCompany,
@@ -17,7 +19,7 @@ export const addjob = async (req, res) => {
   } = req.body;
 
   // Validate required fields
-  if (!companyName || !logoUrl || !jobPosition || !jobType || !mode || !location || !jobDescription || !aboutCompany || !skills) {
+  if (!companyName || !logoUrl || !jobPosition || !jobType || !mode || !totalsize || !currentsize || !location || !jobDescription || !aboutCompany || !skills) {
     return res.status(400).json({ message: "All required fields must be filled." });
   }
 
@@ -27,13 +29,15 @@ export const addjob = async (req, res) => {
     jobPosition,
     jobType,
     mode,
+    totalsize,
+    currentsize,
     location,
     jobDescription,
     aboutCompany,
     skills,
     additionalInformation,
     salary,
-    userid: req.userId, // Retrieved from the middleware
+    userid: req.userId, 
   });
 
   await job.save();
@@ -67,6 +71,8 @@ export const getalljobs = async (req, res) => {
       jobPosition: 1,
       jobType: 1,
       mode: 1,
+      totalsize : 1,
+      currentsize : 1,
       location: 1,
       skills: 1,
       salary: 1,
@@ -78,7 +84,7 @@ export const getalljobs = async (req, res) => {
 
 // Get job details
 export const getjobdetails = async (req, res) => {
-  const jobDetails = await Job.findById(req.params.id);
+  const jobDetails = await Job.findById({_id :req.params.id});
 
   if (!jobDetails) {
     return res.status(404).json({ message: "Job not found" });
@@ -89,6 +95,7 @@ export const getjobdetails = async (req, res) => {
 
 
 export const getjobbyid = async (req,res) =>{
+    console.log(req.params.id)
     const job = await Job.findById(req.params.id);
 
     if(!job){

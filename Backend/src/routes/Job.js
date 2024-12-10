@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.post('/addjob', VerifyToken, asynchandler(addjob))
 router.post('/editjob', VerifyToken, asynchandler(editjob))
-router.get('/getalljobs', VerifyToken, asynchandler(getalljobs))
-router.get('/getjobdetails', VerifyToken, asynchandler(getjobdetails))
+router.get('/getalljobs',  asynchandler(getalljobs))
+router.get('/getjobdetails/:id', VerifyToken, asynchandler(getjobdetails))
 router.get('/getjobbyid', VerifyToken, asynchandler(getjobbyid))
 
 

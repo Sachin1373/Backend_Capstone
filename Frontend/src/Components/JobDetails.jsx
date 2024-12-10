@@ -1,7 +1,8 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useContext } from 'react'
 import styles from '../Styles/JobDetails.module.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import { AuthContext } from '../Context/AuthContext';
 import moment from "moment"
 import { FaMoneyBill } from "react-icons/fa";
 import { FaCalendar } from "react-icons/fa";
@@ -12,9 +13,13 @@ function JobDetails() {
 
   const userdetails = JSON.parse(localStorage.getItem('UserDetails'));
   const token = userdetails?.token;
-  console.log(token)
+  
+  
+  
   const [ViewDetails, setViewDetails]=useState([])
-  const [isloggedin,setisloggedin] = useState(false)
+  // const [isloggedin,setisloggedin] = useState(false)
+
+  const {isLoggedIn} = useContext(AuthContext)
 
   const redirect = useNavigate();
 
@@ -23,13 +28,13 @@ function JobDetails() {
     // useEffect(() => {
     //   const currentTime = new Date().getTime();
     //   const logg =
-    //     tokenTime !== null
-    //       ? tokenTime.expiry > currentTime
+    //   tokenexpiry !== null
+    //       ? tokenexpiry > currentTime
     //         ? true
     //         : false
     //       : false;
     //       setisloggedin(logg);
-    // }, [tokenTime]);
+    // }, [tokenexpiry]);
 
   const handleedit = () =>{
     redirect('/editjob',{ state: { jobId, jobDetails: ViewDetails } })
@@ -73,7 +78,7 @@ function JobDetails() {
              <span>{` at ${ViewDetails.companyName}`}</span>
           </div>
           <div className={styles.details}>
-          {isloggedin && (<button className={styles.editjob} onClick={handleedit}>Edit Job</button>)}
+          {isLoggedIn && (<button className={styles.editjob} onClick={handleedit}>Edit Job</button>)}
               <div className={styles.Jobposted}>
                  <span>
                     {moment( new Date(ViewDetails.createdAt)).fromNow()} .

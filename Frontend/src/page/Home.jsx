@@ -1,28 +1,31 @@
-import React,{ useEffect, useState } from 'react'
+import React,{ useContext, useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 import styles from "../Styles/Home.module.css";
+import { AuthContext } from '../Context/AuthContext';
 import Navbar from '../Components/Navbar'
 import JobList from '../Components/JobList';
 function Home() {
     const [selectedSkills, setSelectedSkills] = useState([]);
     const [searchValue, setSearchValue] = useState("");
-    const [loggedin, setloggedin] = useState(false);
+    const {isLoggedIn} = useContext(AuthContext)
     const redirect = useNavigate();
   
-    const userdetails = JSON.parse(localStorage.getItem("UserDetails"))
-    const tokenTime = userdetails?.expiry; 
+    // const userdetails = JSON.parse(localStorage.getItem("UserDetails"))
+    // const tokenTime = userdetails?.expiry; 
   
-    useEffect(() => {
-      const currentTime = new Date().getTime();
-      const logg =
-        tokenTime !== null
-          ? tokenTime.expiry > currentTime
-            ? true
-            : false
-          : false;
-      setloggedin(logg);
-    }, [tokenTime]);
+    // useEffect(() => {
+    //   const currentTime = new Date().getTime();
+    //   const logg =
+    //     tokenTime !== null
+    //       ? tokenTime > currentTime
+    //         ? true
+    //         : false
+    //       : false;
+    //   setloggedin(logg);
+    // }, [tokenTime]);
+
+    
 
     const handleSearchChange = (e) => {
         setSearchValue(e.target.value);
@@ -48,12 +51,10 @@ function Home() {
       const addJobButton = () => {
         redirect("/addjobs");
       };
-      const handlelogout = () =>{
-        setloggedin(false)
-      }
+     
   return (
     <>
-   <Navbar onLogut={handlelogout}/>
+   <Navbar />
     <div className={styles.jobsearch}>
       <form className={styles.searchform}>
         <div className={styles.searchbar}>
@@ -101,11 +102,11 @@ function Home() {
             </button>
           )}
         </div>
-        {loggedin && (
+        {isLoggedIn && (
           <button className={styles.addjobbtn} onClick={addJobButton}>
             + Add Job
           </button>
-        )}
+        ) }
       </div>
     </div>
     <div className={styles.joblist}>

@@ -2,11 +2,11 @@ import React, { useState} from 'react'
 import styles from '../Styles/Register.module.css'
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form"
-import img from '../assets/Register.png'
+import img from '/public/Register.png'
 function Register() {
   const [isChecked,setisChecked] = useState(false)
   const [RegisterData,setRegisterData] = useState([])
-  console.log(RegisterData);
+  
   const redirect = useNavigate();
  
   const {
@@ -28,7 +28,7 @@ function Register() {
        
         if (response.ok) {
           const result = await response.json();
-          console.log(result);
+          
         } else {
           const error = await response.json();
         }

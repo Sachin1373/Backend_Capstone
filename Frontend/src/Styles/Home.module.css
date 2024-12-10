@@ -116,9 +116,10 @@
 }
 
 .joblist {
-    margin-top: 10vh;
+    margin-top: 5vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 20px;
 }

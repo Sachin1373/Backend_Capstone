@@ -17,7 +17,7 @@
     justify-content: center;
     font-size: xx-large;
     font-weight: 900;
-    margin-top: -40px;
+    margin-top: -20px;
     z-index: 4;
     margin-bottom: 30px;
     gap: 10px;
@@ -67,9 +67,14 @@
     transition: background-color 0.3s ease;
 }
 .postion{
-    font-family: DM Sans;
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-family: Roboto;
+    font-size: 19.49px;
+    font-weight: 500;
+    line-height: 17.39px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    
 }
 .location{
     color: #ed5353;

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "../Styles/Login.module.css"; 
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 import { useForm } from "react-hook-form";
-import img from "../assets/Register.png";
+import img from "/public/Register.png";
 
 function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const {login} = useContext(AuthContext)
   
   const redirect = useNavigate();
 
@@ -22,13 +25,12 @@ function Login() {
       if (response.ok) {
         const result = await response.json();
         console.log(result)
-        localStorage.setItem(
-          "UserDetails",
-          JSON.stringify({
-            token: result.token,
-            Username: result.username,
-            expiry: new Date().getTime() + 60 * 60 * 1000,
-          }))
+        const userdetails = {
+          token : result.token,
+          Username: result.username,
+          expiry: new Date().getTime() + 60 * 60 * 1000, 
+        }
+        login(userdetails)
           setTimeout(()=>{
             redirect('/')
           },2000)
@@ -47,9 +49,9 @@ function Login() {
       <div className={styles.register_wrapper}>
         <div className={styles.form_wrapper}>
           <div className={styles.form}>
-              <div>
-              <h1>Already have an account?</h1>
-              <p>Your Personal job finder is here</p>
+              <div className={styles.login_title}>
+                 <h1>Already have an account?</h1>
+                 <p>Your Personal job finder is here</p>
               </div>
             <form onSubmit={handleSubmit(onSubmit)}>
               <p>

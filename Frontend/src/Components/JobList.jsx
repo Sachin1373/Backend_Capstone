@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styles from "../Styles/JobCard.module.css"
 import JobCard from './JobCard';
 
 const JobList = ({ Search }) => {
@@ -44,7 +45,7 @@ const JobList = ({ Search }) => {
   }, [token]);
 
   return (
-    <div className="job-list">
+    <div className={styles.job_list}>
       {filteredJobs.map((job) => (
         <JobCard key={job._id} job={job} />
       ))}

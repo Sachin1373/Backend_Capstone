@@ -30,7 +30,14 @@
   .loginView span {
     cursor: pointer;
     color: white;
-    font-size: 16px;
+    font-family: DM Sans;
+    font-size: 23px;
+    font-weight: 500;
+    line-height: 33.13px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    
   }
   
   .recruiterLogo {
